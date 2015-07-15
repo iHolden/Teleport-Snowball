@@ -1,0 +1,32 @@
+package me.iHolden.TeleportSB;
+
+import org.bukkit.Sound;
+import org.bukkit.entity.Snowball;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+
+
+public class Main extends JavaPlugin implements Listener {
+	
+	public void onEnable() {
+		getServer().getPluginManager().registerEvents(this, this);
+	}
+	
+	@EventHandler
+	public void p(ProjectileHitEvent e) {
+		Projectile proj = e.getEntity();
+		if(proj instanceof Snowball);
+		Snowball snowball = (Snowball) proj;
+		if(snowball.getShooter() instanceof Player) {
+			Player p = (Player) snowball.getShooter();
+			p.teleport(snowball);
+			p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT, 2, 1);
+			p.playSound(p.getLocation(), Sound.DIG_SNOW, 1, 1);
+			p.playSound(p.getLocation(), Sound.ITEM_PICKUP, 1, 1);			
+			}
+		}
+	}
